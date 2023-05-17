@@ -9,12 +9,12 @@ A customer receives 2 points for every dollar spent over $100 in each transactio
 Given all the transactions of every customer during a period of time(1 year for example), calculate the reward points earned for each customer per month and total.
 
 # Prerequisite to Run the Application/Project
-Java 17.0.7 or above
-Latest or compatible browser, preferably Chrome
+	Java 17.0.7 or above
+	Latest or compatible browser, preferably Chrome
 
 # How To Execute the Project
 	Step-1: Either run the rewards-program\target\rewards-program-0.0.1-SNAPSHOT.jar directly, (OR)
-Import this maven project to any Spring Boot supported IDE (Eclipse or other that supports Java 17)
+	Import this maven project to any Spring Boot supported IDE (Eclipse or other that supports Java 17)
 
 	Step-2: Run the below .java file (by right click and Run as Java Application or using any other equivalent options)
 	rewards-program\src\main\java\com\retailer\api\rest\rewardsprogram\RewardsProgramApplication.java
@@ -24,17 +24,19 @@ Import this maven project to any Spring Boot supported IDE (Eclipse or other tha
 	
 	Step-4: Swagger UI is self explanatory and it guides on what all REST APIs are exposed and how to run those
 	- Base URL: http://localhost:8080
-	- Resource-1: /rewards/customers
-		- This API is used to retrieve rewards for all customers for all transactions that exists in DB
-	- Resource-2: /rewards/customers/{id}
-		- This API is used to retrieve rewards for a specific customer by passing customer_id (ex: 1, 2, 3) in place of {id}
+	- API-1: POST /rewards/transactions/create
+	- API-2: GET  /rewards/transactions/all
+	- API-3: POST /rewards/customers/create
+	- API-4: GET  /rewards/customers/all
+	- API-5: GET  /rewards/per-customer/{last_x_years}/{customer_id}
+	- API-6: GET  /rewards/customers/all
+	- API-7: GET  /rewards/per-customer/{id}
+	- API-7: GET  /rewards/for-all-customers		
+	- API-1: /rewards/customers
+	- Note: Default customer ids available in DB: 1, 2, 3
 
 
-# Improvements to do (Optional)
-	- Add a new customer (POST with json body for single or multiple customers)
-	- Add a new transaction (POST with json body for single or multiple transactions)
-	- Or anything as needed by Business
-	Also need to add below
+# TODO list (Optional)
 	- Unit Tests
 	- Exception Handling
 	- Logging for debugging purposes
