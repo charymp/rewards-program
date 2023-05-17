@@ -10,16 +10,19 @@ Given all the transactions of every customer during a period of time(1 year for 
 
 # Prerequisite to Run the Application/Project
 Java 17.0.7 or above
-Latest or compatible browser, preferred Chrome
+Latest or compatible browser, preferably Chrome
 
 # How To Execute the Project
-Step-1: Either run the rewards-program\target\rewards-program-0.0.1-SNAPSHOT.jar directly, (OR)
+	Step-1: Either run the rewards-program\target\rewards-program-0.0.1-SNAPSHOT.jar directly, (OR)
 Import this maven project to any Spring Boot supported IDE (Eclipse or other that supports Java 17)
-Step-2: Run the below .java file (by right click and Run as Java Application or using any other equivalent options)
+
+	Step-2: Run the below .java file (by right click and Run as Java Application or using any other equivalent options)
 	rewards-program\src\main\java\com\retailer\api\rest\rewardsprogram\RewardsProgramApplication.java
-Step-3: Once the application runs successfully, go to any Browser (preferable Chrmore) and open below Swagger UI URL
+
+	Step-3: Once the application runs successfully, go to any Browser (preferable Chrmore) and open below Swagger UI URL
 	http://localhost:8080/swagger-ui/index.html	
-Step-4: Swagger UI is self explanatory and it guides on what all REST APIs are exposed and how to run those
+	
+	Step-4: Swagger UI is self explanatory and it guides on what all REST APIs are exposed and how to run those
 	- Base URL: http://localhost:8080
 	- Resource-1: /rewards/customers
 		- This API is used to retrieve rewards for all customers for all transactions that exists in DB
