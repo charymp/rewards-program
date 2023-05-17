@@ -2,11 +2,15 @@ package com.retailer.api.rest.rewardsprogram.bean;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Customer {
 	@Id
+	@NotNull
 	private long id;
+
+	@NotNull
 	private String name;
 
 	public long getId() {

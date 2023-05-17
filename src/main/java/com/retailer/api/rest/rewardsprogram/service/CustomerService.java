@@ -15,7 +15,10 @@ public class CustomerService {
 	private CustomerSpringDataJpaRepository customerRepository;
 
 	public List<Customer> findAll() {
-		System.out.println("Total Customers Count - " + customerRepository.count());
 		return customerRepository.findAll();
+	}
+
+	public void saveCustomer(Customer customer) {
+		customerRepository.save(customer);
 	}
 }

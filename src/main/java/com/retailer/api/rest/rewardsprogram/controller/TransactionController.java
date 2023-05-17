@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.retailer.api.rest.rewardsprogram.bean.Customer;
-import com.retailer.api.rest.rewardsprogram.service.CustomerService;
+import com.retailer.api.rest.rewardsprogram.bean.Transaction;
+import com.retailer.api.rest.rewardsprogram.service.TransactionService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/customers")
-public class CustomersController {
+@RequestMapping(path = "rewards/transactions")
+public class TransactionController {// TransactionController
 	@Autowired
-	private CustomerService customerService;
+	private TransactionService txService;
 
 	@GetMapping(path = "/all")
-	public List<Customer> getAllCustomers() {
-		return customerService.findAll();
+	public List<Transaction> getAllTrasactions() {
+		return txService.findAllTxs();
 	}
 
 	@PostMapping(path = "/create")
-	public ResponseEntity<Object> createCustomer(@Valid @RequestBody Customer customer) {
-		customerService.saveCustomer(customer);
+	public ResponseEntity<Object> createCustomer(@Valid @RequestBody Transaction tx) {
+		txService.saveTransaction(tx);
 		return new ResponseEntity<Object>(null, HttpStatus.CREATED);
 	}
 }

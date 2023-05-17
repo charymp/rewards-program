@@ -13,9 +13,17 @@ public class TransactionService {
 
 	@Autowired
 	private TransactionSpringDataJpaRepository transactionRepository;
+	
+	public List<Transaction> findAllTxs() {
+		return transactionRepository.findAll();
+	}
 
 	public List<Transaction> findByCustomerId(long id) {
 		return transactionRepository.findAllByCustomerId(id);
+	}
+
+	public void saveTransaction(Transaction tx) {
+		transactionRepository.save(tx);
 	}
 
 }
