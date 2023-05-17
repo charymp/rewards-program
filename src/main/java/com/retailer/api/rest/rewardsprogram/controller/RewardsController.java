@@ -1,70 +1,46 @@
 package com.retailer.api.rest.rewardsprogram.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.retailer.api.rest.rewardsprogram.bean.Customer;
-import com.retailer.api.rest.rewardsprogram.bean.MonthlyRewards;
-import com.retailer.api.rest.rewardsprogram.bean.TotalRewards;
 import com.retailer.api.rest.rewardsprogram.service.RewardsService;
 
 @RestController
 @RequestMapping(path = "/rewards")
 public class RewardsController {
 
-	private final String AUTH_TOKEN_KEY = "spring.basic.authorization.token";
-
 	@Autowired
 	private RewardsService rewardsService;
 
-	@Autowired
-	private CustomersController customerController;
+	@GetMapping(path = "/per-customer/{last_x_years}/{customer_id}")
+	public ResponseEntity<Object> getRewardsForLastXYearsPerCustomer(@PathVariable int last_x_years,
+			@PathVariable long customer_id) {
 
-	@Autowired
-	private Environment env;
-
-	@GetMapping(path = "/customers/{id}")
-	public ResponseEntity<Object> getTotalRewardsPerCustomer(@RequestParam(name = "Authorization") String authorization,
-			@PathVariable long id) {
-
-		if (!StringUtils.hasLength(authorization) || !authorization.equals(env.getProperty(AUTH_TOKEN_KEY))) {
-			return new ResponseEntity<Object>(String.format("AuthenticationFailed. Verify Authorization Header"),
-					HttpStatus.UNAUTHORIZED);
-		}
-
-		TotalRewards totalRewards = getTotalRewards(id);
-		return new ResponseEntity<Object>(totalRewards, HttpStatus.OK);
+		return new ResponseEntity<Object>(rewardsService.getTotalRewardsPerCustomer(customer_id,
+				rewardsService.findRewardsForLastXYearsPerCustomer(last_x_years, customer_id)), HttpStatus.OK);
 	}
 
-	@GetMapping(path = "/customers")
+	@GetMapping(path = "/for-all-customers/{last_x_years}")
+	public ResponseEntity<Object> getRewardsForLastXYearsForAllCustomers(@PathVariable int last_x_years) {
+
+		return new ResponseEntity<Object>(rewardsService.findRewardsForLastXYearsForAllCustomers(last_x_years),
+				HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/per-customer/{id}")
+	public ResponseEntity<Object> getTotalRewardsPerCustomer(@PathVariable long id) {
+
+		return new ResponseEntity<Object>(rewardsService.getTotalRewardsPerCustomer(id), HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/for-all-customers")
 	public ResponseEntity<Object> getTotalRewardsForAllCustomers() {
-		List<Customer> customers = customerController.getAllCustomers();
-		List<TotalRewards> totalRewardsForAllCustomers = new ArrayList<TotalRewards>();
-
-		for (Customer customer : customers) {
-			totalRewardsForAllCustomers.add(getTotalRewards(customer.getId()));
-		}
-		return new ResponseEntity<Object>(totalRewardsForAllCustomers, HttpStatus.OK);
+		return new ResponseEntity<Object>(rewardsService.getTotalRewardsForAllCustomers(), HttpStatus.OK);
 	}
 
-	private TotalRewards getTotalRewards(long id) {
-		TotalRewards totalRewards = new TotalRewards();
-		List<MonthlyRewards> monthlyRewardsList = rewardsService.findMonthWiseRewardsPerCustomerId(id);
-
-		totalRewards.setCustomerId(id);
-		totalRewards.setMonthlyRewardsList(monthlyRewardsList);
-		totalRewards.setTotalRewards(rewardsService.getTotalYearRewards(monthlyRewardsList));
-		return totalRewards;
-	}
 }

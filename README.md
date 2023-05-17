@@ -13,9 +13,6 @@ Java 17.0.7 or above
 Latest or compatible browser, preferred Chrome
 
 # How To Execute the Project
-Note: For API /rewards/customers/{id} -> It expects Request Parameter to be passed as below
-	- Request Parameter Name to be set -> Authorization
-	- It's Value to be passed -> Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 Step-1: Either run the rewards-program\target\rewards-program-0.0.1-SNAPSHOT.jar directly, (OR)
 Import this maven project to any Spring Boot supported IDE (Eclipse or other that supports Java 17)
 Step-2: Run the below .java file (by right click and Run as Java Application or using any other equivalent options)
@@ -28,19 +25,13 @@ Step-4: Swagger UI is self explanatory and it guides on what all REST APIs are e
 		- This API is used to retrieve rewards for all customers for all transactions that exists in DB
 	- Resource-2: /rewards/customers/{id}
 		- This API is used to retrieve rewards for a specific customer by passing customer_id (ex: 1, 2, 3) in place of {id}
-		- Request Parameter Name to be set -> Authorization
-		- It's Value to be passed -> Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 
-# Improvements
-I couldn't spend much time on this, and I could provide only this much, but I can design and develop even far better solution than this, and I can provide many other APIs like 
-	- Given no of years, pull only those many years rewards for all customers or per customer
-	- Given a specific month pull rewards for particular customer or all customers
+# Improvements to do (Optional)
 	- Add a new customer (POST with json body for single or multiple customers)
 	- Add a new transaction (POST with json body for single or multiple transactions)
 	- Or anything as needed by Business
-Also, this is only not my design/solution, I can still improve this a lot
-I could have added below, but couldn't spend much time
+	Also need to add below
 	- Unit Tests
 	- Exception Handling
 	- Logging for debugging purposes
