@@ -17,7 +17,7 @@ import com.retailer.api.rest.rewardsprogram.service.CustomerService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/customers")
+@RequestMapping(path = "/rewards/customers")
 public class CustomersController {
 	@Autowired
 	private CustomerService customerService;

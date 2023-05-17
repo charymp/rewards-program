@@ -17,7 +17,7 @@ import com.retailer.api.rest.rewardsprogram.service.TransactionService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "rewards/transactions")
+@RequestMapping(path = "/rewards/transactions")
 public class TransactionController {// TransactionController
 	@Autowired
 	private TransactionService txService;
